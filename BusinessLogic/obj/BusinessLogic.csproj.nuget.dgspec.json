@@ -45,6 +45,8 @@
           "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.Entityframeworkcore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.13, )"
             }
