@@ -15,16 +15,14 @@ public sealed class PostController : ControllerBase
     }
 
     [HttpPost]
-    public Task<Post> CreatePostAsync([FromBody] Post post, CancellationToken token = default)
+    public ValueTask<Post> CreatePostAsync([FromBody] Post post, CancellationToken token = default)
     {
         return _postService.CreatePostAsync(post, token);
     }
 
     [HttpGet]
-    public Task<IEnumerable<Post>> GetAllToDoItems(CancellationToken token = default)
+    public ValueTask<IEnumerable<Post>> GetAllToDoItems(CancellationToken token = default)
     {
         return _postService.GetAllPosts(token);
     }
-
-
 }
