@@ -1,19 +1,8 @@
-using DataAccess;
 using Microsoft.EntityFrameworkCore;
-
-namespace BusinessLogic;
-
-public interface IAppDbContext
-{
-    DbSet<User> Users { get; set; }
-    DbSet<Post> Posts { get; set; }
-
-    int SaveChanges();
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-}
+namespace DataAccess;
 
 
-public class AppDbContext : DbContext, IAppDbContext
+public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

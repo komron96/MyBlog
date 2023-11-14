@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\MyBlog\\WebApi\\WebApi.csproj": {}
+    "C:\\MyBlog\\webapi\\WebApi.csproj": {}
   },
   "projects": {
     "C:\\MyBlog\\BusinessLogic\\BusinessLogic.csproj": {
@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\MyBlog\\BusinessLogic\\BusinessLogic.csproj",
         "projectName": "BusinessLogic",
         "projectPath": "C:\\MyBlog\\BusinessLogic\\BusinessLogic.csproj",
-        "packagesPath": "C:\\Users\\Ком\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\komron.saidaliev\\.nuget\\packages\\",
         "outputPath": "C:\\MyBlog\\BusinessLogic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ком\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\komron.saidaliev\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +44,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkcore.InMemory": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
             "Microsoft.Entityframeworkcore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -77,11 +81,11 @@
         "projectUniqueName": "C:\\MyBlog\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
         "projectPath": "C:\\MyBlog\\DataAccess\\DataAccess.csproj",
-        "packagesPath": "C:\\Users\\Ком\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\komron.saidaliev\\.nuget\\packages\\",
         "outputPath": "C:\\MyBlog\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ком\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\komron.saidaliev\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -107,11 +111,19 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkcore.InMemory": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
             "Microsoft.EntityFrameworkcore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.13, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Npgsql.EntityFrameworkcore.postgresql": {
               "target": "Package",
@@ -138,17 +150,17 @@
         }
       }
     },
-    "C:\\MyBlog\\WebApi\\WebApi.csproj": {
+    "C:\\MyBlog\\webapi\\WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\MyBlog\\WebApi\\WebApi.csproj",
+        "projectUniqueName": "C:\\MyBlog\\webapi\\WebApi.csproj",
         "projectName": "WebApi",
-        "projectPath": "C:\\MyBlog\\WebApi\\WebApi.csproj",
-        "packagesPath": "C:\\Users\\Ком\\.nuget\\packages\\",
-        "outputPath": "C:\\MyBlog\\WebApi\\obj\\",
+        "projectPath": "C:\\MyBlog\\webapi\\WebApi.csproj",
+        "packagesPath": "C:\\Users\\komron.saidaliev\\.nuget\\packages\\",
+        "outputPath": "C:\\MyBlog\\webapi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ком\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\komron.saidaliev\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -192,6 +204,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.13, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

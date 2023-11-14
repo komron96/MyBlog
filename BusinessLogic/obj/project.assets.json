@@ -82,6 +82,22 @@
           "build/net6.0/Microsoft.EntityFrameworkCore.Design.props": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.InMemory/7.0.13": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.13"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/7.0.13": {
         "type": "package",
         "dependencies": {
@@ -404,6 +420,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkcore.InMemory": "7.0.13",
+          "Microsoft.Extensions.DependencyInjection": "7.0.0",
           "Npgsql.EntityFrameworkcore.postgresql": "7.0.11"
         },
         "compile": {
@@ -490,6 +508,20 @@
         "lib/net6.0/Microsoft.EntityFrameworkCore.Design.xml",
         "microsoft.entityframeworkcore.design.7.0.13.nupkg.sha512",
         "microsoft.entityframeworkcore.design.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/7.0.13": {
+      "sha512": "HFSMOeNNfCQ16Moy6Rv99/xhVOzW27ND9YcoDJrQ9KocJP8ZONuz5OtTJg9pfKFKblBPj6LWNI496VrAWkECyg==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.inmemory/7.0.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "microsoft.entityframeworkcore.inmemory.7.0.13.nupkg.sha512",
+        "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/7.0.13": {
@@ -1040,11 +1072,12 @@
   "projectFileDependencyGroups": {
     "net7.0": [
       "DataAccess >= 1.0.0",
+      "Microsoft.EntityFrameworkcore.InMemory >= 7.0.13",
       "Microsoft.Entityframeworkcore.Tools >= 7.0.13"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ком\\.nuget\\packages\\": {}
+    "C:\\Users\\komron.saidaliev\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -1052,11 +1085,11 @@
       "projectUniqueName": "C:\\MyBlog\\BusinessLogic\\BusinessLogic.csproj",
       "projectName": "BusinessLogic",
       "projectPath": "C:\\MyBlog\\BusinessLogic\\BusinessLogic.csproj",
-      "packagesPath": "C:\\Users\\Ком\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\komron.saidaliev\\.nuget\\packages\\",
       "outputPath": "C:\\MyBlog\\BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ком\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\komron.saidaliev\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1086,6 +1119,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkcore.InMemory": {
+            "target": "Package",
+            "version": "[7.0.13, )"
+          },
           "Microsoft.Entityframeworkcore.Tools": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",

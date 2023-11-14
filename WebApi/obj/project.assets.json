@@ -526,7 +526,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "DataAccess": "1.0.0"
+          "DataAccess": "1.0.0",
+          "Microsoft.EntityFrameworkcore.InMemory": "7.0.13"
         },
         "compile": {
           "bin/placeholder/BusinessLogic.dll": {}
@@ -539,6 +540,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkcore.InMemory": "7.0.13",
+          "Microsoft.Extensions.DependencyInjection": "7.0.0",
           "Npgsql.EntityFrameworkcore.postgresql": "7.0.11"
         },
         "compile": {
@@ -1547,24 +1550,25 @@
       "Microsoft.AspNetCore.OpenApi >= 7.0.7",
       "Microsoft.EntityFrameworkcore.InMemory >= 7.0.13",
       "Microsoft.Entityframeworkcore.Tools >= 7.0.13",
+      "Microsoft.Extensions.DependencyInjection >= 7.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0",
       "npgsql.entityframeworkcore.postgresql >= 7.0.11"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ком\\.nuget\\packages\\": {}
+    "C:\\Users\\komron.saidaliev\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\MyBlog\\WebApi\\WebApi.csproj",
+      "projectUniqueName": "C:\\MyBlog\\webapi\\WebApi.csproj",
       "projectName": "WebApi",
-      "projectPath": "C:\\MyBlog\\WebApi\\WebApi.csproj",
-      "packagesPath": "C:\\Users\\Ком\\.nuget\\packages\\",
-      "outputPath": "C:\\MyBlog\\WebApi\\obj\\",
+      "projectPath": "C:\\MyBlog\\webapi\\WebApi.csproj",
+      "packagesPath": "C:\\Users\\komron.saidaliev\\.nuget\\packages\\",
+      "outputPath": "C:\\MyBlog\\webapi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ком\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\komron.saidaliev\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1608,6 +1612,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[7.0.13, )"
+          },
+          "Microsoft.Extensions.DependencyInjection": {
+            "target": "Package",
+            "version": "[7.0.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
