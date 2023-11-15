@@ -9,8 +9,11 @@ public sealed class EFCorePostRepository : IPostRepository
     {
         _appDbContext = appDbContext;
     }
-    public async ValueTask<Post> CreatePostAsync(Post post, CancellationToken token)
+    public async ValueTask<Post> CreatePostAsync(Post post, long userId, CancellationToken token)
     {
+        var user = await _appDbContext.Users.FindAsync(userId);
+        
+        post.User = user;
         await _appDbContext.Posts.AddAsync(post, token);
         await _appDbContext.SaveChangesAsync(token);
         return post;
@@ -18,6 +21,6 @@ public sealed class EFCorePostRepository : IPostRepository
 
     public async ValueTask<IEnumerable<Post>> GetAllPosts(CancellationToken token)
     {
-        return await _appDbContext.Posts.ToListAsync(token);   
+        return await _appDbContext.Posts.ToListAsync(token);
     }
 }

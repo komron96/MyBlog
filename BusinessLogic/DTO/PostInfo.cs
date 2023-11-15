@@ -6,7 +6,6 @@ public readonly record struct PostInfo
     string Content,
     DateTime CreatedAt,
     short Likes,
-    string? Comments,
     string Visibility
 );
 

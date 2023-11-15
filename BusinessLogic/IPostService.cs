@@ -3,7 +3,7 @@ namespace BusinessLogic;
 
 public interface IPostService
 {
-    ValueTask<Post> CreatePostAsync(Post post, CancellationToken token);
+    ValueTask<Post> CreatePostAsync(Post post, long userId, CancellationToken token);
     ValueTask<IEnumerable<Post>> GetAllPosts(CancellationToken token);
 
 }
@@ -17,9 +17,9 @@ public sealed class PostService : IPostService
         _iPostRepository = iPostRepository;
     }
 
-    public async ValueTask<Post> CreatePostAsync(Post post, CancellationToken token)
+    public async ValueTask<Post> CreatePostAsync(Post post, long userId, CancellationToken token)
     {
-        return await _iPostRepository.CreatePostAsync(post, token);
+        return await _iPostRepository.CreatePostAsync(post, userId, token);
     }
 
     public async ValueTask<IEnumerable<Post>> GetAllPosts(CancellationToken token)

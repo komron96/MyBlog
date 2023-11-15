@@ -13,10 +13,10 @@ public sealed class PostController : ControllerBase
         _postService = postService;
     }
 
-    [HttpPost]
-    public async ValueTask<Post> CreatePostAsync([FromBody] Post post, CancellationToken token)
+    [HttpPost("/api/v1/posts/create")]
+    public async ValueTask<Post> CreatePostAsync([FromBody] Post post, [FromQuery] long userId, CancellationToken token)
     {
-        return await _postService.CreatePostAsync(post, token);
+        return await _postService.CreatePostAsync(post, userId, token);
     }
 
     [HttpGet]

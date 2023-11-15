@@ -11,7 +11,6 @@ public static class Converter
             post.Content,
             post.CreatedAt,
             post.Likes,
-            post.Comments,
             post.Visibility.ToString());
     }
 
@@ -35,7 +34,6 @@ public static class Converter
             Content = postInfo.Content,
             CreatedAt = postInfo.CreatedAt,
             Likes = postInfo.Likes,
-            Comments = postInfo.Comments,
             Visibility = Enum.Parse<Visibility>(postInfo.Visibility)
         };
     }
