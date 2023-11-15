@@ -1,7 +1,5 @@
 namespace BusinessLogic;
-
-
-readonly record struct OrderInfo
+public readonly record struct PostInfo
 (
     long Id,
     string Title,
@@ -11,3 +9,4 @@ readonly record struct OrderInfo
     string? Comments,
     string Visibility
 );
+

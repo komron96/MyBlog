@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic;
-
+using DataAccess;
 
 [ApiController]
 [Route("/api/v1/posts")]
@@ -14,9 +14,9 @@ public sealed class PostController : ControllerBase
     }
 
     [HttpPost]
-    public async ValueTask<Post> CreatePostAsync([FromBody] Post post, CancellationToken token = default)
+    public async ValueTask<Post> CreatePostAsync([FromBody] Post post, CancellationToken token)
     {
-        return _postService.CreatePostAsync(post, token);
+        return await _postService.CreatePostAsync(post, token);
     }
 
     [HttpGet]

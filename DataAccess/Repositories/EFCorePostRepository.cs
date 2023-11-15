@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-
 namespace DataAccess;
 
 public sealed class EFCorePostRepository : IPostRepository

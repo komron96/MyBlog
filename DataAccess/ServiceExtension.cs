@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-
 namespace DataAccess;
 
 public static class ServiceExtension
@@ -9,5 +8,6 @@ public static class ServiceExtension
     {
         services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("ToDoDb"));
         services.AddScoped<IPostRepository, EFCorePostRepository>();
+        services.AddScoped<IUserRepository, EFCoreUserRepository>();
     }
 }

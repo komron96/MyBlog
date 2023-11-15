@@ -16,13 +16,13 @@ public sealed class UserService : IUserService
         _iUserRepository = iUserRepository;
     }
 
-    public ValueTask<User> CreateUserAsync(User user, CancellationToken token)
+    public async ValueTask<User> CreateUserAsync(User user, CancellationToken token)
     {
-        return _iUserRepository.CreateUserAsync(user, token);
+        return await _iUserRepository.CreateUserAsync(user, token);
     }
 
-    public ValueTask<IEnumerable<User>> GetAllUsers(CancellationToken token)
+    public async ValueTask<IEnumerable<User>> GetAllUsers(CancellationToken token)
     {
-        return _iUserRepository.GetAllUsers(token);
+        return await _iUserRepository.GetAllUsers(token);
     }
 }

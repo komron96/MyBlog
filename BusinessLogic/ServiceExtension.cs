@@ -7,7 +7,9 @@ public static class ServiceExtension
 {
     public static void ConfigureServices(this IServiceCollection services)
     {
-        services.AddTransient<IPostService, PostService>();
         services.ConfigureDataAccess();
+
+        services.AddTransient<IPostService, PostService>();
+        services.AddTransient<IUserService, UserService>();
     }
-}
+} 

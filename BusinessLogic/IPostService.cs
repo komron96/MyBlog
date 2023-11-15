@@ -17,13 +17,13 @@ public sealed class PostService : IPostService
         _iPostRepository = iPostRepository;
     }
 
-    public ValueTask<Post> CreatePostAsync(Post post, CancellationToken token)
+    public async ValueTask<Post> CreatePostAsync(Post post, CancellationToken token)
     {
-        return _iPostRepository.CreatePostAsync(post, token);
+        return await _iPostRepository.CreatePostAsync(post, token);
     }
 
-    public ValueTask<IEnumerable<Post>> GetAllPosts(CancellationToken token)
+    public async ValueTask<IEnumerable<Post>> GetAllPosts(CancellationToken token)
     {
-        return _iPostRepository.GetAllPosts(token);
+        return await _iPostRepository.GetAllPosts(token);
     }
 }

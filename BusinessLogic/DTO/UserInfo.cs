@@ -1,5 +1,5 @@
 namespace BusinessLogic;
-readonly record struct UserInfo
+public readonly record struct UserInfo
 (
      long Id,
      string FirstName,

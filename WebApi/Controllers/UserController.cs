@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic;
+using DataAccess;
 
 
 
@@ -15,14 +16,14 @@ public sealed class UserController : ControllerBase
     }
 
     [HttpPost]
-    public ValueTask<User> CreateUserAsync([FromBody] User user, CancellationToken token = default)
+    public async ValueTask<User> CreateUserAsync([FromBody] User user, CancellationToken token = default)
     {
-        return _userService.CreateUserAsync(user, token);
+        return await _userService.CreateUserAsync(user, token);
     }
 
     [HttpGet]
-    public ValueTask<IEnumerable<User>> GetAllToDoItems(CancellationToken token = default)
+    public async ValueTask<IEnumerable<User>> GetAllToDoItems(CancellationToken token = default)
     {
-        return _userService.GetAllUsers(token);
+        return await _userService.GetAllUsers(token);
     }
 }
