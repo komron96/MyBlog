@@ -7,6 +7,6 @@ public sealed class Post
     public string Content { get; set; }
     public DateTime CreatedAt { get; set; }
     public short Likes { get; set; }
-    public string Comments { get; set; }
+    public string? Comments { get; set; }
     public Visibility Visibility { get; set; }
 }

@@ -6,9 +6,22 @@ using DataAccess;
 [Route("/api/v1/posts")]
 public sealed class PostController : ControllerBase
 {
+    private readonly IPostService _postService;
 
-    public PostController()
+    public PostController(IPostService postService)
     {
+        _postService = postService;
+    }
 
+    [HttpPost]
+    public async ValueTask<Post> CreatePostAsync([FromBody] Post post, CancellationToken token)
+    {
+        return await _postService.CreatePostAsync(post, token);
+    }
+
+    [HttpGet]
+    public ValueTask<IEnumerable<Post>> GetAllToDoItems(CancellationToken token = default)
+    {
+        return _postService.GetAllPosts(token);
     }
 }
