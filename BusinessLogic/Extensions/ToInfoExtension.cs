@@ -23,19 +23,4 @@ public static class Converter
             user.Email,
             user.RegDate);
     }
-
-
-        public static Post ToPostInfo2(this PostInfo postInfo)
-    {
-        return new Post
-        {
-            Id = postInfo.Id,
-            Title = postInfo.Title,
-            Content = postInfo.Content,
-            CreatedAt = postInfo.CreatedAt,
-            Likes = postInfo.Likes,
-            Visibility = Enum.Parse<Visibility>(postInfo.Visibility)
-        };
-    }
-
 }
