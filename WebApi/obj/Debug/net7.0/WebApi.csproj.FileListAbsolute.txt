@@ -46,3 +46,5 @@ C:\MyBlog\WebApi\obj\Debug\net7.0\refint\WebApi.dll
 C:\MyBlog\WebApi\obj\Debug\net7.0\WebApi.pdb
 C:\MyBlog\WebApi\obj\Debug\net7.0\WebApi.genruntimeconfig.cache
 C:\MyBlog\WebApi\obj\Debug\net7.0\ref\WebApi.dll
+C:\MyBlog\WebApi\bin\Debug\net7.0\Microsoft.Extensions.DependencyInjection.dll
+C:\MyBlog\WebApi\bin\Debug\net7.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll

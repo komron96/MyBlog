@@ -6,7 +6,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> modelBuilder)
     {
-        modelBuilder.HasKey(p => p.Id).HasName("pk_id");;
+        modelBuilder.HasKey(p => p.Id).HasName("pk_id");
         modelBuilder.Property(p => p.Id).HasColumnType("SERIAL").HasColumnName("id").IsRequired();
         modelBuilder.Property(p => p.FirstName).HasColumnType("VARCHAR(20)").HasColumnName("first_name").IsRequired();
         modelBuilder.Property(p => p.LastName).HasColumnType("VARCHAR(20)").HasColumnName("last_name").IsRequired();
@@ -28,7 +28,5 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .WithOne(c => c.User)
             .HasForeignKey(c => c.UserId);
 
-
-            
     }
 }

@@ -8,7 +8,7 @@ public sealed class CommentConfiguration : IEntityTypeConfiguration<Comment>
     {
         modelBuilder.HasKey(p => p.Id).HasName("pk_id"); ;
         modelBuilder.Property(p => p.Id).HasColumnType("SERIAL").HasColumnName("id").IsRequired();
-        modelBuilder.Property(p => p.Text).HasColumnType("VARCHAR(255)").HasColumnName("text");
+        modelBuilder.Property(p => p.Text).HasColumnType("VARCHAR(255)").HasColumnName("text").IsRequired();;
         modelBuilder.Property(p => p.CommentedAt).HasColumnType("VARCHAR(20)").HasColumnName("content").IsRequired();
 
         modelBuilder

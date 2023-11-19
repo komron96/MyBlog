@@ -14,11 +14,10 @@ public sealed class PostController : ControllerBase
     }
 
     [HttpPost("create/{userId}")]
-    public async ValueTask<Post> CreatePostAsync([FromBody] Post post, [FromQuery] User user, CancellationToken token)
+    public async ValueTask<Post> CreatePostAsync([FromBody] Post post, [FromRoute] long userId, CancellationToken token)
     {
-        return await _postService.CreatePostAsync(post, user, token);
+        return await _postService.CreatePostAsync(post, userId, token);
     }
-
 
     [HttpGet]
     public async ValueTask<IEnumerable<Post>> GetPosts(CancellationToken token = default)
