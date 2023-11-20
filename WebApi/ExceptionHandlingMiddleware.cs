@@ -32,9 +32,13 @@ public sealed class ExceptionHandlingMiddleware
 
         var errorResponse = ex switch
         {
-            NotFoundException _ => new { StatusCode = HttpStatusCode.NotFound, IsSuccessful = false, Message = "Resource Not Found!" },
+            PostNotFoundException _ => new { StatusCode = HttpStatusCode.NotFound, IsSuccessful = false, Message = "Post not found in Database !" },
+            UserNotFoundException _ => new { StatusCode = HttpStatusCode.NotFound, IsSuccessful = false, Message = "User not found in Database !" },
+            NotAuthorized _ => new { StatusCode = HttpStatusCode.Unauthorized, IsSuccessful = false, Message = "User is not authorized." },
+            BadRequestException _ => new { StatusCode = HttpStatusCode.BadRequest, IsSuccessful = false, Message = "Something gone wrong with request, check your sending information" },
             _ => new { StatusCode = HttpStatusCode.InternalServerError, IsSuccessful = false, Message = "Failed to execute the request, error: " + ex.Message }
         };
+
 
         httpContext.Response.ContentType = "application/json";
         httpContext.Response.StatusCode = (int)errorResponse.StatusCode;

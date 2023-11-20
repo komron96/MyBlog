@@ -12,10 +12,7 @@ public sealed class EFCommentostRepository : ICommentRepository
     public async Task<Comment> CreateCommentAsync(Comment comment, long postId, CancellationToken token)
     {
         var post = await _appDbContext.Posts.FindAsync(postId, token);
-        if(post != null)
-        {
-            post.Comments.Add(comment);
-        }
+        post?.Comments.Add(comment);
 
         await _appDbContext.Comments.AddAsync(comment, token);
         await _appDbContext.SaveChangesAsync(token);

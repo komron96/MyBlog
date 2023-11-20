@@ -6,7 +6,7 @@ public interface IPostService
     Task<Post> CreatePostAsync(Post post, long userId, CancellationToken token);
     Task<IEnumerable<Post>> GetAllPosts(CancellationToken token);
     Task<IEnumerable<Post>> GetPostsByUserIdAsync(long userId, CancellationToken token);
-    Task<bool> DeletePostAsync(long postId, CancellationToken token);
+    Task<Post> DeletePostAsync(long postId, CancellationToken token);
 }
 
 public sealed class PostService : IPostService
@@ -32,7 +32,7 @@ public sealed class PostService : IPostService
     {
         return await _iPostRepository.GetPostsByUserIdAsync(userId, token);
     }
-    public async Task<bool> DeletePostAsync(long postId, CancellationToken token)
+    public async Task<Post> DeletePostAsync(long postId, CancellationToken token)
     {
         return await _iPostRepository.DeletePostAsync(postId, token);
     }

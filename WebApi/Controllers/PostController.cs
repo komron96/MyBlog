@@ -16,38 +16,28 @@ public sealed class PostController : ControllerBase
     }
 
     [HttpPost("create")]
-    public async ValueTask<ActionResult> CreatePostAsync([FromBody] Post post, [FromQuery] long userId, CancellationToken token)
+    public async Task<Post> CreatePostAsync([FromBody] Post post, [FromQuery] long userId, CancellationToken token)
     {
-        var creatingPost = await _postService.CreatePostAsync(post, userId, token);
-        if(creatingPost != null)
-        {
-            return Ok(creatingPost); 
-        }
-        else
-        {
-            return NotFound("User not found");
-        }
+        return await _postService.CreatePostAsync(post, userId, token);
     }
 
     [HttpGet]
-    [AllowAnonymous]
-    public async ValueTask<IEnumerable<Post>> GetPosts(CancellationToken token = default)
+    public async Task<IEnumerable<Post>> GetPosts(CancellationToken token = default)
     {
         return await _postService.GetAllPosts(token);
     }
 
     [HttpGet("user/{userId}")]
     [AllowAnonymous]
-    public async Task<ActionResult> GetPostsByUserId([FromRoute] long userId, CancellationToken token)
+    public async  Task<IEnumerable<Post>> GetPostsByUserIdAsync([FromRoute] long userId, CancellationToken token)
     {
-        var posts = await _postService.GetPostsByUserIdAsync(userId, token);
-        if (posts != null && posts.Any())
-        {
-            return Ok(posts);
-        }
-        else
-        {
-            return NotFound("Posts not found");
-        }
+        return await _postService.GetPostsByUserIdAsync(userId, token);
+    }
+
+    //http://localhost:5191/posts?id=1
+    [HttpDelete]
+    public async Task<Post> DeletePostAsync([FromRoute] long postId, CancellationToken token)
+    {
+        return await _postService.DeletePostAsync(postId, token) ?? throw new PostNotFoundException();
     }
 }

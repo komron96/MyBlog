@@ -9,7 +9,6 @@ using DataAccess;
 [ApiController]
 [Route("users")]
 [Authorize]
-
 public sealed class UserController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -40,14 +39,13 @@ public sealed class UserController : ControllerBase
         var (follower, following) = await _userService.FollowUserAsync(followerId, followingId, token);
         if (follower == null || following == null)
         {
-            return NotFound("One or both users not found");
+            throw new UserNotFoundException();
         }
 
         if (follower.Following.Contains(following))
         {
             return Conflict($"You have already subscriped to {following.FirstName} {following.LastName}");
         }
-        
         
         return Ok($"Successfully subscribed to {following.FirstName} {following.LastName}");
     }

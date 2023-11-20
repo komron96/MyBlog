@@ -6,7 +6,6 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection(Constants.ConnectionStringsSectionName));
 
-// builder.Services.AddHttpContextAccessor();
 builder.Services.ConfigureServices(builder.Configuration);
 
 builder.Services.AddAuthentication

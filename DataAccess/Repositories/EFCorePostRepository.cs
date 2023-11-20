@@ -10,20 +10,25 @@ public sealed class EFCorePostRepository : IPostRepository
     {
         _appDbContext = appDbContext;
     }
-    public async Task<Post> CreatePostAsync(Post post, long userId, CancellationToken token)
+public async Task<Post> CreatePostAsync(Post post, long userId, CancellationToken token)
+{
+    User user = await _appDbContext.Users.FindAsync(userId);
+
+    if(user != null)
     {
-        var user = await _appDbContext.Users.FindAsync(userId);
-        if(user == null)
-        {
-            return null;
-        }
         post.UserId = userId;
         post.User = user;
+
+        _appDbContext.Posts.Add(post);
         await _appDbContext.SaveChangesAsync(token);
-        await _appDbContext.Posts.AddAsync(post, token);
-        await _appDbContext.SaveChangesAsync(token);
+
         return post;
     }
+    else
+    {
+        return null;
+    }
+}
 
     public async Task<IEnumerable<Post>> GetAllPosts(CancellationToken token)
     {
@@ -32,28 +37,24 @@ public sealed class EFCorePostRepository : IPostRepository
 
     public async Task<IEnumerable<Post>> GetPostsByUserIdAsync(long userId, CancellationToken token)
     {
-        if (_appDbContext != null)
-        {
-            return await _appDbContext.Posts
-                .Where(post => post.UserId == userId)
-                .ToListAsync(token);
-        }
-        return null;
+        return await _appDbContext.Posts
+            .Where(post => post.UserId == userId)
+            .ToListAsync(token);
     }
 
 
-    public async Task<bool> DeletePostAsync(long postId, CancellationToken token)
+    public async Task<Post> DeletePostAsync(long postId, CancellationToken token)
     {
         var post = await _appDbContext.Posts.FirstOrDefaultAsync(p => p.Id == postId, cancellationToken: token);
         if (post != null)
         {
             _appDbContext.Posts.Remove(post);
             await _appDbContext.SaveChangesAsync(token);
-            return true;
+            return null;
         }
         else
         {
-            return false;
+            return null;
         }
     }
 }
