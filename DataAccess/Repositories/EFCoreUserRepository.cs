@@ -23,23 +23,17 @@ public sealed class EFCoreUserRepository : IUserRepository
     }
 
 
-    public async Task<bool> FollowUserAsync(long followerId, long followingId, CancellationToken token)
+    public async Task<(User, User)> FollowUserAsync(long followerId, long followingId, CancellationToken token)
     {
         var follower = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == followerId);
         var following = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == followingId);
 
         if (follower != null && following != null)
         {
-            if (!follower.Following.Contains(following))
-            {
-                follower.Following.Add(following);
-                await _appDbContext.SaveChangesAsync(token);
-
-                return true;
-            }
-            return false;
+            return (follower, following);
         }
-        return false;
+        else { return (null, null); }
+
     }
 
 }

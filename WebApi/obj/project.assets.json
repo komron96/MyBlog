@@ -1563,19 +1563,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ком\\.nuget\\packages\\": {}
+    "C:\\Users\\komron.saidaliev\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\MyBlog\\WebApi\\WebApi.csproj",
+      "projectUniqueName": "C:\\MyBlog\\webapi\\WebApi.csproj",
       "projectName": "WebApi",
-      "projectPath": "C:\\MyBlog\\WebApi\\WebApi.csproj",
-      "packagesPath": "C:\\Users\\Ком\\.nuget\\packages\\",
-      "outputPath": "C:\\MyBlog\\WebApi\\obj\\",
+      "projectPath": "C:\\MyBlog\\webapi\\WebApi.csproj",
+      "packagesPath": "C:\\Users\\komron.saidaliev\\.nuget\\packages\\",
+      "outputPath": "C:\\MyBlog\\webapi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ком\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\komron.saidaliev\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

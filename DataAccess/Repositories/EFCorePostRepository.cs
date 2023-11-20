@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+
 namespace DataAccess;
 
 public sealed class EFCorePostRepository : IPostRepository
@@ -12,8 +13,13 @@ public sealed class EFCorePostRepository : IPostRepository
     public async Task<Post> CreatePostAsync(Post post, long userId, CancellationToken token)
     {
         var user = await _appDbContext.Users.FindAsync(userId);
+        if(user == null)
+        {
+            return null;
+        }
         post.UserId = userId;
         post.User = user;
+        await _appDbContext.SaveChangesAsync(token);
         await _appDbContext.Posts.AddAsync(post, token);
         await _appDbContext.SaveChangesAsync(token);
         return post;
@@ -26,9 +32,13 @@ public sealed class EFCorePostRepository : IPostRepository
 
     public async Task<IEnumerable<Post>> GetPostsByUserIdAsync(long userId, CancellationToken token)
     {
-        return await _appDbContext.Posts
-            .Where(post => post.UserId == userId)
-            .ToListAsync(token);
+        if (_appDbContext != null)
+        {
+            return await _appDbContext.Posts
+                .Where(post => post.UserId == userId)
+                .ToListAsync(token);
+        }
+        return null;
     }
 
 

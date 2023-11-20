@@ -12,9 +12,10 @@ public sealed class EFCommentostRepository : ICommentRepository
     public async Task<Comment> CreateCommentAsync(Comment comment, long postId, CancellationToken token)
     {
         var post = await _appDbContext.Posts.FindAsync(postId, token);
-
-        comment.PostId = postId;
-        comment.Post = post;
+        if(post != null)
+        {
+            post.Comments.Add(comment);
+        }
 
         await _appDbContext.Comments.AddAsync(comment, token);
         await _appDbContext.SaveChangesAsync(token);
@@ -31,5 +32,23 @@ public sealed class EFCommentostRepository : ICommentRepository
         return await _appDbContext.Comments
             .Where(comment => comment.PostId == postId)
             .ToListAsync(token);
+    }
+
+
+    public async Task<bool> AddComment(long postId, Comment comment, CancellationToken token)
+    {
+        Post post = await _appDbContext.Posts.FindAsync(postId);
+
+        if (post != null)
+        {
+            post.Comments.Add(comment);
+
+            await _appDbContext.SaveChangesAsync(token);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

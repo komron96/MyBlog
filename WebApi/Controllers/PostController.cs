@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic;
 using DataAccess;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("posts")]
+[Authorize]
 public sealed class PostController : ControllerBase
 {
     private readonly IPostService _postService;
@@ -13,29 +15,39 @@ public sealed class PostController : ControllerBase
         _postService = postService;
     }
 
-    [HttpPost("create/{userId}")]
-    public async ValueTask<Post> CreatePostAsync([FromBody] Post post, [FromRoute] long userId, CancellationToken token)
+    [HttpPost("create")]
+    public async ValueTask<ActionResult> CreatePostAsync([FromBody] Post post, [FromQuery] long userId, CancellationToken token)
     {
-        return await _postService.CreatePostAsync(post, userId, token);
+        var creatingPost = await _postService.CreatePostAsync(post, userId, token);
+        if(creatingPost != null)
+        {
+            return Ok(creatingPost); 
+        }
+        else
+        {
+            return NotFound("User not found");
+        }
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async ValueTask<IEnumerable<Post>> GetPosts(CancellationToken token = default)
     {
         return await _postService.GetAllPosts(token);
     }
 
     [HttpGet("user/{userId}")]
-    public async Task<ActionResult<ICollection<Post>>> GetPostsByUserId(long userId, CancellationToken token)
+    [AllowAnonymous]
+    public async Task<ActionResult> GetPostsByUserId([FromRoute] long userId, CancellationToken token)
     {
-        try
+        var posts = await _postService.GetPostsByUserIdAsync(userId, token);
+        if (posts != null && posts.Any())
         {
-            var posts = await _postService.GetPostsByUserIdAsync(userId, token);
             return Ok(posts);
         }
-        catch (Exception ex)
+        else
         {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
+            return NotFound("Posts not found");
         }
     }
 }

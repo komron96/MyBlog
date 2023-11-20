@@ -3,9 +3,9 @@ namespace BusinessLogic;
 
 public interface ICommentService
 {
-    Task<Comment> CreateCommentAsync(Comment comment, long postId, CancellationToken token);
-    Task<IEnumerable<Comment>> GetAllComments(CancellationToken token);
-    Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(long postId, CancellationToken token);
+    public Task<Comment> CreateCommentAsync(Comment comment, long postId, CancellationToken token);
+    public Task<IEnumerable<Comment>> GetAllComments(CancellationToken token);
+    public Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(long postId, CancellationToken token);
 }
 
 public sealed class CommentService : ICommentService

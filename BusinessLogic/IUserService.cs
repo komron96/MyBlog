@@ -5,7 +5,7 @@ public interface IUserService
 {
     Task<User> CreateUserAsync(User user, CancellationToken token);
     Task<IEnumerable<User>> GetAllUsers(CancellationToken token);
-    Task<bool> FollowUserAsync(long followerId, long followingId, CancellationToken token);
+    Task<(User, User)> FollowUserAsync(long followerId, long followingId, CancellationToken token);
 }
 
 public sealed class UserService : IUserService
@@ -27,7 +27,7 @@ public sealed class UserService : IUserService
         return await _iUserRepository.GetAllUsers(token);
     }
 
-    public async Task<bool> FollowUserAsync(long followerId, long followingId, CancellationToken token)
+    public async Task<(User, User)> FollowUserAsync(long followerId, long followingId, CancellationToken token)
     {
         return await _iUserRepository.FollowUserAsync(followerId, followingId, token);
     }
