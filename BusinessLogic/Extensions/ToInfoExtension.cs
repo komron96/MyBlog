@@ -3,41 +3,24 @@ using DataAccess;
 namespace BusinessLogic;
 public static class Converter
 {
-    public static PostInfo ToPostInfo(this Post post)
+    public static PostDto ToPostDto(this Post post)
     {
-        return new PostInfo(
+        return new PostDto(
             post.Id,
             post.Title,
             post.Content,
-            post.CreatedAt,
             post.Likes,
-            post.Comments,
-            post.Visibility.ToString());
+            post.CreatedAt,
+            post.Visibility);
     }
 
-    public static UserInfo ToUserInfo(this User user)
+    public static UserDto ToUserDto(this User user)
     {
-        return new UserInfo(
+        return new UserDto(
             user.Id,
             user.FirstName,
             user.LastName,
             user.Email,
             user.RegDate);
     }
-
-
-        public static Post ToPostInfo2(this PostInfo postInfo)
-    {
-        return new Post
-        {
-            Id = postInfo.Id,
-            Title = postInfo.Title,
-            Content = postInfo.Content,
-            CreatedAt = postInfo.CreatedAt,
-            Likes = postInfo.Likes,
-            Comments = postInfo.Comments,
-            Visibility = Enum.Parse<Visibility>(postInfo.Visibility)
-        };
-    }
-
 }

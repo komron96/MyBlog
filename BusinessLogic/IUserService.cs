@@ -3,8 +3,9 @@ namespace BusinessLogic;
 
 public interface IUserService
 {
-    ValueTask<User> CreateUserAsync(User user, CancellationToken token);
-    ValueTask<IEnumerable<User>> GetAllUsers(CancellationToken token);
+    Task<User> CreateUserAsync(User user, CancellationToken token);
+    Task<IEnumerable<User>> GetAllUsers(CancellationToken token);
+    Task<(User, User)> FollowUserAsync(long followerId, long followingId, CancellationToken token);
 }
 
 public sealed class UserService : IUserService
@@ -16,13 +17,18 @@ public sealed class UserService : IUserService
         _iUserRepository = iUserRepository;
     }
 
-    public async ValueTask<User> CreateUserAsync(User user, CancellationToken token)
+    public async Task<User> CreateUserAsync(User user, CancellationToken token)
     {
         return await _iUserRepository.CreateUserAsync(user, token);
     }
 
-    public async ValueTask<IEnumerable<User>> GetAllUsers(CancellationToken token)
+    public async Task<IEnumerable<User>> GetAllUsers(CancellationToken token)
     {
         return await _iUserRepository.GetAllUsers(token);
+    }
+
+    public async Task<(User, User)> FollowUserAsync(long followerId, long followingId, CancellationToken token)
+    {
+        return await _iUserRepository.FollowUserAsync(followerId, followingId, token);
     }
 }

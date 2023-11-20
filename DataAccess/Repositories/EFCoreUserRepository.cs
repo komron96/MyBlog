@@ -21,4 +21,19 @@ public sealed class EFCoreUserRepository : IUserRepository
     {
         return await _appDbContext.Users.ToListAsync(token);
     }
+
+
+    public async Task<(User, User)> FollowUserAsync(long followerId, long followingId, CancellationToken token)
+    {
+        var follower = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == followerId);
+        var following = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == followingId);
+
+        if (follower != null && following != null)
+        {
+            return (follower, following);
+        }
+        else { return (null, null); }
+
+    }
+
 }
