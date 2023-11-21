@@ -20,7 +20,7 @@ public sealed class PostService : IPostService
 
     public async Task<PostDto?> CreatePostAsync(PostDto postDto, long userId, CancellationToken token)
     {
-        Post post = await _iPostRepository.CreatePostAsync(postDto.ToPostClass(), userId, token);
+        Post? post = await _iPostRepository.CreatePostAsync(postDto.ToPostClass(), userId, token);
         if (post is null)
             return null;
         return post.ToPostDto();

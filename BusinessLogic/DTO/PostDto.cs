@@ -8,5 +8,4 @@ public readonly record struct PostDto
         string Content,
         short Likes,
         string CreatedAt,
-        long UserId,
-        User User);
+        long UserId);

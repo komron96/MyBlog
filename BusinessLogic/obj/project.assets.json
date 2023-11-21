@@ -1084,7 +1084,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\komron.saidaliev\\.nuget\\packages\\": {}
+    "C:\\Users\\Ком\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -1092,11 +1092,11 @@
       "projectUniqueName": "C:\\MyBlog\\BusinessLogic\\BusinessLogic.csproj",
       "projectName": "BusinessLogic",
       "projectPath": "C:\\MyBlog\\BusinessLogic\\BusinessLogic.csproj",
-      "packagesPath": "C:\\Users\\komron.saidaliev\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Ком\\.nuget\\packages\\",
       "outputPath": "C:\\MyBlog\\BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\komron.saidaliev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ком\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

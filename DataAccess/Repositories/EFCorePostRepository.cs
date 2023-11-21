@@ -1,4 +1,3 @@
-using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess;
@@ -11,10 +10,9 @@ public sealed class EFCorePostRepository : IPostRepository
     {
         _appDbContext = appDbContext;
     }
-    public async Task<Post> CreatePostAsync(Post post, long userId, CancellationToken token)
+    public async Task<Post?> CreatePostAsync(Post post, long userId, CancellationToken token)
     {
-        User user = await _appDbContext.Users.FindAsync(userId);
-        user.Posts.Add(post);
+        User? user = await _appDbContext.Users.FindAsync(new object?[] { userId }, cancellationToken: token);
         if (user != null)
         {
             post.UserId = userId;
@@ -22,7 +20,6 @@ public sealed class EFCorePostRepository : IPostRepository
 
             _appDbContext.Posts.Add(post);
             await _appDbContext.SaveChangesAsync(token);
-
             return post;
         }
         else
@@ -46,7 +43,7 @@ public sealed class EFCorePostRepository : IPostRepository
 
     public async Task<bool> DeletePostAsync(long postId, CancellationToken token)
     {
-        Post post = await _appDbContext.Posts.FindAsync(postId);
+        Post ?post = await _appDbContext.Posts.FindAsync(new object?[] { postId }, cancellationToken: token);
         if (post != null)
         {
             _appDbContext.Posts.Remove(post);

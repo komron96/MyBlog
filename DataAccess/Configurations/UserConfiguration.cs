@@ -6,8 +6,9 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> modelBuilder)
     {
-        modelBuilder.HasKey(p => p.Id).HasName("pk_id");
-        modelBuilder.Property(p => p.Id).HasColumnType("SERIAL").HasColumnName("id").IsRequired();
+        modelBuilder.ToTable("users");
+        modelBuilder.HasKey(p => p.Id).HasName("pk_user_id");
+        modelBuilder.Property(p => p.Id).UseIdentityColumn().HasColumnName("id").IsRequired();
         modelBuilder.Property(p => p.FirstName).HasColumnType("VARCHAR(20)").HasColumnName("first_name").IsRequired();
         modelBuilder.Property(p => p.LastName).HasColumnType("VARCHAR(20)").HasColumnName("last_name").IsRequired();
         modelBuilder.Property(p => p.Email).HasColumnType("VARCHAR(20)").HasColumnName("email");
@@ -21,12 +22,13 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         modelBuilder
             .HasMany(u => u.Posts)
             .WithOne(p => p.User)
-            .HasForeignKey(p => p.UserId);
+            .HasForeignKey(p => p.UserId)
+            .HasConstraintName("post_id");
 
         modelBuilder
             .HasMany(u => u.Comments)
             .WithOne(c => c.User)
-            .HasForeignKey(c => c.UserId);
-
+            .HasForeignKey(c => c.UserId)
+            .HasConstraintName("comment_id");
     }
 }

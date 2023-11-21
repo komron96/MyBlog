@@ -12,5 +12,6 @@ public static class ServiceExtension
 
         services.AddTransient<IPostService, PostService>();
         services.AddTransient<IUserService, UserService>();
+        services.AddTransient<ICommentService, CommentService>();
     }
 } 

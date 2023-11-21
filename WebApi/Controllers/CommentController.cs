@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic;
 using Microsoft.AspNetCore.Authorization;
+namespace WebApi;
 
 [ApiController]
 [Route("comment")]
@@ -14,8 +15,8 @@ public sealed class CommentController : ControllerBase
         _commentService = commentService;
     }
 
-    [HttpPost("create/{postId}")]
-    public async ValueTask<CommentDto> AddCommentAsync([FromBody] CommentDto commentDto, [FromRoute] long postId, CancellationToken token)
+    [HttpPost("create")]
+    public async ValueTask<CommentDto> AddCommentAsync([FromBody] CommentDto commentDto, [FromQuery] long postId, CancellationToken token)
     {
         return await _commentService.AddCommentAsync(commentDto, postId, token);
     }

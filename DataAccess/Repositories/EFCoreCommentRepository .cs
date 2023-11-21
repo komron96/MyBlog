@@ -1,26 +1,29 @@
 using Microsoft.EntityFrameworkCore;
 namespace DataAccess;
 
-public sealed class EFCommentostRepository : ICommentRepository
+public sealed class EFCoreCommentRepository : ICommentRepository
 {
     private readonly AppDbContext _appDbContext;
 
-    public EFCommentostRepository(AppDbContext appDbContext)
+    public EFCoreCommentRepository(AppDbContext appDbContext)
     {
         _appDbContext = appDbContext;
     }
     public async Task<Comment> AddCommentAsync(Comment comment, long postId, CancellationToken token)
     {
-        Post post = await _appDbContext.Posts.FindAsync(postId);
-
+        Post? post = await _appDbContext.Posts.FindAsync(new object?[] { postId }, cancellationToken: token);
         if (post != null)
         {
-            post.Comments.Add(comment);
+            post.Id = postId;
 
+            _appDbContext.Comments.Add(comment);
             await _appDbContext.SaveChangesAsync(token);
             return comment;
         }
-        return null;
+        else
+        {
+            return null;
+        }
     }
     public async Task<IEnumerable<Comment>> GetAllCommentsAsync(CancellationToken token)
     {

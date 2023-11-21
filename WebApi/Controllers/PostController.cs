@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic;
 using Microsoft.AspNetCore.Authorization;
-// using DataAccess;
+namespace WebApi;
 
 [ApiController]
 [Route("posts")]

@@ -12,5 +12,6 @@ public static class ServiceExtension
         // services.AddDbContext<AppDbContext>(opt => opt.UseNpgsql(configuration.GetConnectionString(DefaultConnectionKeyName)));
         services.AddScoped<IPostRepository, EFCorePostRepository>();
         services.AddScoped<IUserRepository, EFCoreUserRepository>();
+        services.AddScoped<ICommentRepository, EFCoreCommentRepository>();
     }
 }

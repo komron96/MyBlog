@@ -18,9 +18,9 @@ public sealed class CommentService : ICommentService
     }
 
 
-    public async Task<CommentDto> AddCommentAsync(CommentDto commentDto, long userId, CancellationToken token)
+    public async Task<CommentDto> AddCommentAsync(CommentDto commentDto, long postId, CancellationToken token)
     {
-        Comment comment = await _iCommentRepository.AddCommentAsync(commentDto.ToCommentClass(), userId, token);
+        Comment comment = await _iCommentRepository.AddCommentAsync(commentDto.ToCommentClass(), postId, token);
         return comment.ToCommentDto();
     }
 

@@ -8,10 +8,10 @@ public class Comment
 
 
     //Post config
-    public required Post Post { get; set; }
+    public Post? Post { get; set; }
     public long PostId { get; set; }
 
     //User config
-    public required User User { get; set; }
+    public User? User { get; set; }
     public long UserId { get; set; }
 }

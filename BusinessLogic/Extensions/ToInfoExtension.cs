@@ -23,8 +23,7 @@ public static class ConverterToDto
             post.Content,
             post.Likes,
             post.CreatedAt.ToString("yyyy-MM-dd"),
-            post.UserId,
-            post.User);
+            post.UserId);
     }
 
     public static CommentDto ToCommentDto(this Comment comment)
@@ -33,9 +32,9 @@ public static class ConverterToDto
             comment.Id,
             comment.Text,
             comment.CreatedAt.ToString("yyyy-MM-dd"),
-            comment.Post,
+            // comment.Post,
             comment.PostId,
-            comment.User,
+            // comment.User,
             comment.UserId);
     }
 
@@ -69,8 +68,7 @@ public static class ConverterToClass
             Content = postDto.Content,
             Likes = postDto.Likes,
             CreatedAt = DateTime.Parse(postDto.CreatedAt),
-            UserId = postDto.UserId,
-            User = postDto.User
+            UserId = postDto.UserId
         };
     }
     public static Comment ToCommentClass(this CommentDto commentDto)
@@ -80,9 +78,9 @@ public static class ConverterToClass
             Id = commentDto.Id,
             Text = commentDto.Text,
             CreatedAt = DateTime.Parse(commentDto.CreatedAt),
-            Post = commentDto.Post,
+            // Post = commentDto.Post,
             PostId = commentDto.PostId,
-            User = commentDto.User,
+            // User = commentDto.User,
             UserId = commentDto.UserId
         };
     }

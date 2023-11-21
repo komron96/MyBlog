@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
 using BusinessLogic;
-
-
+namespace WebApi;
 
 [ApiController]
 [Route("users")]
@@ -11,12 +10,10 @@ using BusinessLogic;
 public sealed class UserController : ControllerBase
 {
     private readonly IUserService _userService;
-    private readonly IOptionsMonitor<ConnectionStrings> _options;
 
     public UserController(IUserService userService, IOptionsMonitor<ConnectionStrings> options)
     {
         _userService = userService;
-        _options = options;
     }
 
     [HttpPost]
