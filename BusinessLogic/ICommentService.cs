@@ -3,7 +3,7 @@ namespace BusinessLogic;
 
 public interface ICommentService
 {
-    public Task<Comment> CreateCommentAsync(Comment comment, long postId, CancellationToken token);
+    public Task<CommentDto> AddCommentAsync(Comment comment, long postId, CancellationToken token);
     public Task<IEnumerable<Comment>> GetAllComments(CancellationToken token);
     public Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(long postId, CancellationToken token);
 }
@@ -17,10 +17,18 @@ public sealed class CommentService : ICommentService
         _iCommentRepository = iCommentRepository;
     }
 
-    public async Task<Comment> CreateCommentAsync(Comment comment, long postId, CancellationToken token)
+    public Task<CommentDto> AddCommentAsync(Comment comment, long postId, CancellationToken token)
     {
-        return await _iCommentRepository.CreateCommentAsync(comment, postId, token);
+        throw new NotImplementedException();
     }
+
+    // public async Task<CommentDto> AddCommentAsync(CommentDto commentDto, long userId, CancellationToken token)
+    // {
+    //     Comment comment = await _iCommentRepository.AddCommentAsync(commentDto.ToCommentClass(), userId, token);
+    //     if (post is null)
+    //         return null;
+    //     return post.ToPostDto();
+    // }
 
     public async Task<IEnumerable<Comment>> GetAllComments(CancellationToken token)
     {

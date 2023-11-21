@@ -1,3 +1,4 @@
+
 namespace BusinessLogic;
 public readonly record struct UserDto
 (
@@ -5,5 +6,5 @@ public readonly record struct UserDto
      string FirstName,
      string LastName,
      string? Email,
-     DateTime RegDate
+     string RegDate
 );

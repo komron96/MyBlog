@@ -12,7 +12,6 @@ public sealed class PostConfiguration : IEntityTypeConfiguration<Post>
         modelBuilder.Property(p => p.Content).HasColumnType("VARCHAR(255)").HasColumnName("content").IsRequired();
         modelBuilder.Property(p => p.CreatedAt).HasColumnType("TIMESTAMP").HasColumnName("created_at").IsRequired(); ;
         modelBuilder.Property(p => p.Likes).HasColumnType("INT").HasColumnName("likes").IsRequired();
-        modelBuilder.Property(p => p.Visibility).HasColumnType("VARCHAR(20)").HasColumnName("visibillity");
 
         modelBuilder
             .HasOne(p => p.User)

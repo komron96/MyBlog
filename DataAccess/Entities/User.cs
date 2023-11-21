@@ -2,13 +2,6 @@ namespace DataAccess;
 
 public sealed class User
 {
-    public User()
-    {
-        Following = new List<User>();
-        Followers = new List<User>();
-        Posts = new List<Post>();
-    }
-
     public long Id { get; set; }
     public required string FirstName { get; set; }
     public required string LastName { get; set; }

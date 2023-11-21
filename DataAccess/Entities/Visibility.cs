@@ -1,7 +1,7 @@
-namespace DataAccess;
+// namespace DataAccess;
 
-public enum Visibility
-{
-    Public,
-    Private
-}
+// public enum Visibility
+// {
+//     Public,
+//     Private
+// }

@@ -3,9 +3,10 @@ namespace BusinessLogic;
 
 public interface IUserService
 {
-    Task<User> CreateUserAsync(User user, CancellationToken token);
-    Task<IEnumerable<User>> GetAllUsers(CancellationToken token);
-    Task<(User, User)> FollowUserAsync(long followerId, long followingId, CancellationToken token);
+    Task<UserDto?> CreateUserAsync(UserDto userDto, CancellationToken token = default);
+    Task<IEnumerable<UserDto>> GetAllUsers(CancellationToken token = default);
+    Task<(UserDto?, UserDto?)> FollowUserAsync(long followerId, long followingId, CancellationToken token = default);
+    Task<bool> DeleteUserAsync(long userId, CancellationToken token = default);
 }
 
 public sealed class UserService : IUserService
@@ -17,18 +18,33 @@ public sealed class UserService : IUserService
         _iUserRepository = iUserRepository;
     }
 
-    public async Task<User> CreateUserAsync(User user, CancellationToken token)
+    public async Task<UserDto?> CreateUserAsync(UserDto userDto, CancellationToken token = default)
     {
-        return await _iUserRepository.CreateUserAsync(user, token);
+        User user = await _iUserRepository.CreateUserAsync(userDto.ToUserClass(), token);
+        if (user is null)
+            return null;
+        return user.ToUserDto();
     }
 
-    public async Task<IEnumerable<User>> GetAllUsers(CancellationToken token)
+    public async Task<IEnumerable<UserDto>> GetAllUsers(CancellationToken token = default)
     {
-        return await _iUserRepository.GetAllUsers(token);
+        var users = await _iUserRepository.GetAllUsers(token);
+        var userDtos = users.Select(ConverterToDto.ToUserDto).ToList();
+        return userDtos;
     }
 
-    public async Task<(User, User)> FollowUserAsync(long followerId, long followingId, CancellationToken token)
+    public async Task<(UserDto?, UserDto?)> FollowUserAsync(long followerId, long followingId, CancellationToken token = default)
     {
-        return await _iUserRepository.FollowUserAsync(followerId, followingId, token);
+        (User follower, User following) = await _iUserRepository.FollowUserAsync(followerId, followingId, token);
+        if (follower is null || following == null)
+        {
+            return (null, null);
+        }
+        return (follower.ToUserDto(), following.ToUserDto());
+    }
+
+    public async Task<bool> DeleteUserAsync(long userId, CancellationToken token)
+    {
+        return await _iUserRepository.DeleteUserAsync(userId, token);
     }
 }

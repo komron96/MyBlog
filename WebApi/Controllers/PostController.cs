@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic;
-using DataAccess;
 using Microsoft.AspNetCore.Authorization;
+// using DataAccess;
 
 [ApiController]
 [Route("posts")]
@@ -16,28 +16,28 @@ public sealed class PostController : ControllerBase
     }
 
     [HttpPost("create")]
-    public async Task<Post> CreatePostAsync([FromBody] Post post, [FromQuery] long userId, CancellationToken token)
+    public async Task<PostDto?> CreatePostAsync([FromBody] PostDto postDto, [FromQuery] long userId, CancellationToken token)
     {
-        return await _postService.CreatePostAsync(post, userId, token);
+        return await _postService.CreatePostAsync(postDto, userId, token);
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Post>> GetPosts(CancellationToken token = default)
+    public async Task<IEnumerable<PostDto>> GetPosts(CancellationToken token = default)
     {
         return await _postService.GetAllPosts(token);
     }
 
     [HttpGet("user/{userId}")]
     [AllowAnonymous]
-    public async  Task<IEnumerable<Post>> GetPostsByUserIdAsync([FromRoute] long userId, CancellationToken token)
+    public async  Task<IEnumerable<PostDto>> GetPostsByUserIdAsync([FromRoute] long userId, CancellationToken token)
     {
         return await _postService.GetPostsByUserIdAsync(userId, token);
     }
 
     //http://localhost:5191/posts?id=1
     [HttpDelete]
-    public async Task<Post> DeletePostAsync([FromRoute] long postId, CancellationToken token)
+    public async Task<bool> DeletePostAsync([FromRoute] long postId, CancellationToken token)
     {
-        return await _postService.DeletePostAsync(postId, token) ?? throw new PostNotFoundException();
+        return await _postService.DeletePostAsync(postId, token);
     }
 }

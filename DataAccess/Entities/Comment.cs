@@ -4,7 +4,7 @@ public class Comment
 {
     public long Id { get; set; }
     public required string Text { get; set; }
-    public DateTime CommentedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
 
 
     //Post config

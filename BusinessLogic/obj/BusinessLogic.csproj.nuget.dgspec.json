@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\MyBlog\\BusinessLogic\\BusinessLogic.csproj",
         "projectName": "BusinessLogic",
         "projectPath": "C:\\MyBlog\\BusinessLogic\\BusinessLogic.csproj",
-        "packagesPath": "C:\\Users\\Ком\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\komron.saidaliev\\.nuget\\packages\\",
         "outputPath": "C:\\MyBlog\\BusinessLogic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ком\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\komron.saidaliev\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -85,11 +85,11 @@
         "projectUniqueName": "C:\\MyBlog\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
         "projectPath": "C:\\MyBlog\\DataAccess\\DataAccess.csproj",
-        "packagesPath": "C:\\Users\\Ком\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\komron.saidaliev\\.nuget\\packages\\",
         "outputPath": "C:\\MyBlog\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ком\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\komron.saidaliev\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -14,11 +14,11 @@ public sealed class CommentController : ControllerBase
         _commentService = commentService;
     }
 
-    [HttpPost("create/{postId}")]
-    public async ValueTask<Comment> CreatePostAsync([FromBody] Comment comment, [FromRoute] long postId, CancellationToken token)
-    {
-        return await _commentService.CreateCommentAsync(comment, postId, token);
-    }
+    // [HttpPost("create/{postId}")]
+    // public async ValueTask<Comment> CreatePostAsync([FromBody] Comment comment, [FromRoute] long postId, CancellationToken token)
+    // {
+    //     return await _commentService.CreateCommentAsync(comment, postId, token);
+    // }
 
     [HttpGet]
     public async ValueTask<IEnumerable<Comment>> GetPosts(CancellationToken token = default)

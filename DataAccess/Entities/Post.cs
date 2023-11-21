@@ -7,7 +7,7 @@ public sealed class Post
     public required string Content { get; set; }
     public short Likes { get; set; }
     public DateTime CreatedAt { get; set; }
-    public Visibility Visibility { get; set; }
+    // public Visibility Visibility { get; set; }
 
     //UserConfig
     public long UserId { get; set; }

@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
 using BusinessLogic;
-using DataAccess;
 
 
 
@@ -22,13 +21,13 @@ public sealed class UserController : ControllerBase
 
     [HttpPost]
     [AllowAnonymous]
-    public async Task<User> CreateUserAsync([FromBody] User user, CancellationToken token = default)
+    public async Task<UserDto> CreateUserAsync([FromBody] UserDto UserDto, CancellationToken token = default)
     {
-        return await _userService.CreateUserAsync(user, token);
+        return (UserDto)await _userService.CreateUserAsync(UserDto, token);
     }
 
     [HttpGet]
-    public async Task<IEnumerable<User>> GetAllToDoItems(CancellationToken token = default)
+    public async Task<IEnumerable<UserDto>> GetAllToDoItems(CancellationToken token = default)
     {
         return await _userService.GetAllUsers(token);
     }
@@ -36,17 +35,37 @@ public sealed class UserController : ControllerBase
     [HttpPost("{followerId}/follow/{followingId}")]
     public async Task<IActionResult> FollowUserAsync(long followerId, long followingId, CancellationToken token)
     {
-        var (follower, following) = await _userService.FollowUserAsync(followerId, followingId, token);
-        if (follower == null || following == null)
+        (UserDto? followerUserDto, UserDto? followingUserDto) = await _userService.FollowUserAsync(followerId, followingId, token);
+
+        if (followerUserDto == null || followingUserDto == null)
         {
             throw new UserNotFoundException();
         }
 
-        if (follower.Following.Contains(following))
+        UserDto followerUser = followerUserDto.Value;
+        UserDto followingUser = followingUserDto.Value;
+
+        var followerUserClass = ConverterToClass.ToUserClass(followerUser);
+        var followingUserClass = ConverterToClass.ToUserClass(followingUser);
+
+        if (followerUserClass != null && followingUserClass != null)
         {
-            return Conflict($"You have already subscriped to {following.FirstName} {following.LastName}");
+            if (followerUserClass.Following != null && followerUserClass.Following.Contains(followingUserClass))
+            {
+                return Conflict($"You have already subscribed to {followingUserClass.FirstName} {followingUserClass.LastName}");
+            }
+            return Ok($"Successfully subscribed to {followingUserClass.FirstName} {followingUserClass.LastName}");
         }
-        
-        return Ok($"Successfully subscribed to {following.FirstName} {following.LastName}");
+        else
+        {
+            throw new UserNotFoundException();
+        }
+    }
+
+    //http://localhost:5191/users?id=1
+    [HttpDelete]
+    public async Task<bool> DeleteUserAsync([FromRoute] long userId, CancellationToken token)
+    {
+        return await _userService.DeleteUserAsync(userId, token);
     }
 }
