@@ -29,14 +29,14 @@ public sealed class PostService : IPostService
     public async Task<IEnumerable<PostDto>> GetAllPosts(CancellationToken token)
     {
         var posts = await _iPostRepository.GetAllPosts(token);
-        var postDtos = posts.Select(ConverterToDto.ToPostDto).ToList();
+        var postDtos = posts.Select(s => s.ToPostDto()).ToList();
         return postDtos;
     }
 
     public async Task<IEnumerable<PostDto>> GetPostsByUserIdAsync(long userId, CancellationToken token)
     {
         var posts = await _iPostRepository.GetPostsByUserIdAsync(userId, token);
-        var postDtos = posts.Select(ConverterToDto.ToPostDto).ToList();
+        var postDtos = posts.Select(s => s.ToPostDto()).ToList();
         return postDtos;
     }
 

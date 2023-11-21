@@ -4,7 +4,7 @@ namespace BusinessLogic;
 public interface IUserService
 {
     Task<UserDto?> CreateUserAsync(UserDto userDto, CancellationToken token = default);
-    Task<IEnumerable<UserDto>> GetAllUsers(CancellationToken token = default);
+    Task<IEnumerable<UserDto>> GetAllUsersAsync(CancellationToken token = default);
     Task<(UserDto?, UserDto?)> FollowUserAsync(long followerId, long followingId, CancellationToken token = default);
     Task<bool> DeleteUserAsync(long userId, CancellationToken token = default);
 }
@@ -26,10 +26,10 @@ public sealed class UserService : IUserService
         return user.ToUserDto();
     }
 
-    public async Task<IEnumerable<UserDto>> GetAllUsers(CancellationToken token = default)
+    public async Task<IEnumerable<UserDto>> GetAllUsersAsync(CancellationToken token = default)
     {
         var users = await _iUserRepository.GetAllUsers(token);
-        var userDtos = users.Select(ConverterToDto.ToUserDto).ToList();
+        var userDtos = users.Select(s=> s.ToUserDto()).ToList();
         return userDtos;
     }
 

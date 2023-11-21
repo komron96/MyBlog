@@ -27,7 +27,7 @@ public static class ConverterToDto
             post.User);
     }
 
-    public static CommentDto ToPostDto(this Comment comment)
+    public static CommentDto ToCommentDto(this Comment comment)
     {
         return new CommentDto(
             comment.Id,

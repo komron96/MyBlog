@@ -29,7 +29,7 @@ public sealed class UserController : ControllerBase
     [HttpGet]
     public async Task<IEnumerable<UserDto>> GetAllToDoItems(CancellationToken token = default)
     {
-        return await _userService.GetAllUsers(token);
+        return await _userService.GetAllUsersAsync(token);
     }
 
     [HttpPost("{followerId}/follow/{followingId}")]

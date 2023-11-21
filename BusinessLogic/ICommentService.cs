@@ -3,9 +3,9 @@ namespace BusinessLogic;
 
 public interface ICommentService
 {
-    public Task<CommentDto> AddCommentAsync(Comment comment, long postId, CancellationToken token);
-    public Task<IEnumerable<Comment>> GetAllComments(CancellationToken token);
-    public Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(long postId, CancellationToken token);
+    public Task<CommentDto> AddCommentAsync(CommentDto commentDto, long postId, CancellationToken token);
+    public Task<IEnumerable<CommentDto>> GetAllCommentsAsync(CancellationToken token);
+    public Task<IEnumerable<CommentDto>> GetCommentsByPostIdAsync(long postId, CancellationToken token);
 }
 
 public sealed class CommentService : ICommentService
@@ -17,26 +17,24 @@ public sealed class CommentService : ICommentService
         _iCommentRepository = iCommentRepository;
     }
 
-    public Task<CommentDto> AddCommentAsync(Comment comment, long postId, CancellationToken token)
+
+    public async Task<CommentDto> AddCommentAsync(CommentDto commentDto, long userId, CancellationToken token)
     {
-        throw new NotImplementedException();
+        Comment comment = await _iCommentRepository.AddCommentAsync(commentDto.ToCommentClass(), userId, token);
+        return comment.ToCommentDto();
     }
 
-    // public async Task<CommentDto> AddCommentAsync(CommentDto commentDto, long userId, CancellationToken token)
-    // {
-    //     Comment comment = await _iCommentRepository.AddCommentAsync(commentDto.ToCommentClass(), userId, token);
-    //     if (post is null)
-    //         return null;
-    //     return post.ToPostDto();
-    // }
-
-    public async Task<IEnumerable<Comment>> GetAllComments(CancellationToken token)
+    public async Task<IEnumerable<CommentDto>> GetAllCommentsAsync(CancellationToken token)
     {
-        return await _iCommentRepository.GetAllComments(token);
+        var comments = await _iCommentRepository.GetAllCommentsAsync(token);
+        var commentsDto = comments.Select(s => s.ToCommentDto()).ToList();
+        return commentsDto;
     }
 
-    public async Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(long postId, CancellationToken token)
+    public async Task<IEnumerable<CommentDto>> GetCommentsByPostIdAsync(long postId, CancellationToken token)
     {
-        return await _iCommentRepository.GetCommentsByPostIdAsync(postId, token);
+        var comments = await _iCommentRepository.GetCommentsByPostIdAsync(postId, token);
+        var commentsDto = comments.Select(s => s.ToCommentDto()).ToList();
+        return commentsDto;
     }
 }

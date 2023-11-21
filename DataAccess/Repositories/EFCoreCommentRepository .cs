@@ -22,7 +22,7 @@ public sealed class EFCommentostRepository : ICommentRepository
         }
         return null;
     }
-    public async Task<IEnumerable<Comment>> GetAllComments(CancellationToken token)
+    public async Task<IEnumerable<Comment>> GetAllCommentsAsync(CancellationToken token)
     {
         return await _appDbContext.Comments.ToListAsync(token);
     }

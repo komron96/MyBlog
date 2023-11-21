@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic;
 using Microsoft.AspNetCore.Authorization;
-using DataAccess;
 
 [ApiController]
 [Route("comment")]
+[Authorize]
 public sealed class CommentController : ControllerBase
 {
     private readonly ICommentService _commentService;
@@ -14,29 +14,22 @@ public sealed class CommentController : ControllerBase
         _commentService = commentService;
     }
 
-    // [HttpPost("create/{postId}")]
-    // public async ValueTask<Comment> CreatePostAsync([FromBody] Comment comment, [FromRoute] long postId, CancellationToken token)
-    // {
-    //     return await _commentService.CreateCommentAsync(comment, postId, token);
-    // }
+    [HttpPost("create/{postId}")]
+    public async ValueTask<CommentDto> AddCommentAsync([FromBody] CommentDto commentDto, [FromRoute] long postId, CancellationToken token)
+    {
+        return await _commentService.AddCommentAsync(commentDto, postId, token);
+    }
 
     [HttpGet]
-    public async ValueTask<IEnumerable<Comment>> GetPosts(CancellationToken token = default)
+    [AllowAnonymous]
+    public async ValueTask<IEnumerable<CommentDto>> GetPostsAsync(CancellationToken token = default)
     {
-        return await _commentService.GetAllComments(token);
+        return await _commentService.GetAllCommentsAsync(token);
     }
 
     [HttpGet("post/{postId}")]
-    public async Task<ActionResult<ICollection<Post>>> GetCommentsByPostId(long postId, CancellationToken token)
+    public async Task<IEnumerable<CommentDto>> GetCommentsByPostIdAsync(long postId, CancellationToken token)
     {
-        try
-        {
-            var comment = await _commentService.GetCommentsByPostIdAsync(postId, token);
-            return Ok(comment);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
-        }
+        return await _commentService.GetCommentsByPostIdAsync(postId, token);
     }
 }
