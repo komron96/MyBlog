@@ -16,6 +16,7 @@ public sealed class UserController : ControllerBase
         _userService = userService;
     }
 
+    //http://localhost:5191/users
     [HttpPost]
     [AllowAnonymous]
     public async Task<UserDto> CreateUserAsync([FromBody] UserDto UserDto, CancellationToken token = default)
@@ -59,9 +60,9 @@ public sealed class UserController : ControllerBase
         }
     }
 
-    //http://localhost:5191/users?id=1
+    //http://localhost:5191/users?userId=1
     [HttpDelete]
-    public async Task<bool> DeleteUserAsync([FromRoute] long userId, CancellationToken token)
+    public async Task<bool> DeleteUserAsync([FromQuery] long userId, CancellationToken token)
     {
         return await _userService.DeleteUserAsync(userId, token);
     }

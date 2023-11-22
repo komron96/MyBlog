@@ -15,6 +15,7 @@ public sealed class PostController : ControllerBase
         _postService = postService;
     }
 
+    //http://localhost:5191/posts/create?userId=1
     [HttpPost("create")]
     public async Task<PostDto?> CreatePostAsync([FromBody] PostDto postDto, [FromQuery] long userId, CancellationToken token)
     {
