@@ -17,28 +17,28 @@ public sealed class PostController : ControllerBase
 
     //http://localhost:5191/posts/create?userId=1
     [HttpPost("create")]
-    public async Task<PostDto?> CreatePostAsync([FromBody] PostDto postDto, [FromQuery] long userId, CancellationToken token)
+    public Task<PostDto?> CreatePostAsync([FromBody] PostDto postDto, [FromQuery] long userId, CancellationToken token)
     {
-        return await _postService.CreatePostAsync(postDto, userId, token);
+        return _postService.CreatePostAsync(postDto, userId, token);
     }
 
     [HttpGet]
-    public async Task<IEnumerable<PostDto>> GetPosts(CancellationToken token = default)
+    public Task<IEnumerable<PostDto>> GetPosts(CancellationToken token = default)
     {
-        return await _postService.GetAllPosts(token);
+        return _postService.GetAllPosts(token);
     }
 
     [HttpGet("user/{userId}")]
     [AllowAnonymous]
-    public async  Task<IEnumerable<PostDto>> GetPostsByUserIdAsync([FromRoute] long userId, CancellationToken token)
+    public  Task<IEnumerable<PostDto>> GetPostsByUserIdAsync([FromRoute] long userId, CancellationToken token)
     {
-        return await _postService.GetPostsByUserIdAsync(userId, token);
+        return _postService.GetPostsByUserIdAsync(userId, token);
     }
 
     //http://localhost:5191/posts?id=1
     [HttpDelete]
-    public async Task<bool> DeletePostAsync([FromRoute] long postId, CancellationToken token)
+    public Task<bool> DeletePostAsync([FromRoute] long postId, CancellationToken token)
     {
-        return await _postService.DeletePostAsync(postId, token);
+        return _postService.DeletePostAsync(postId, token);
     }
 }

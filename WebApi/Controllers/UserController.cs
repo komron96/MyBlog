@@ -19,15 +19,15 @@ public sealed class UserController : ControllerBase
     //http://localhost:5191/users
     [HttpPost]
     [AllowAnonymous]
-    public async Task<UserDto> CreateUserAsync([FromBody] UserDto UserDto, CancellationToken token = default)
+    public  Task<UserDto> CreateUserAsync([FromBody] UserDto UserDto, CancellationToken token = default)
     {
-        return (UserDto)await _userService.CreateUserAsync(UserDto, token);
+        return _userService.CreateUserAsync(UserDto, token);
     }
 
     [HttpGet]
-    public async Task<IEnumerable<UserDto>> GetAllToDoItems(CancellationToken token = default)
+    public Task<IEnumerable<UserDto>> GetAllToDoItems(CancellationToken token = default)
     {
-        return await _userService.GetAllUsersAsync(token);
+        return _userService.GetAllUsersAsync(token);
     }
 
     [HttpPost("{followerId}/follow/{followingId}")]
@@ -62,8 +62,8 @@ public sealed class UserController : ControllerBase
 
     //http://localhost:5191/users?userId=1
     [HttpDelete]
-    public async Task<bool> DeleteUserAsync([FromQuery] long userId, CancellationToken token)
+    public Task<bool> DeleteUserAsync([FromQuery] long userId, CancellationToken token)
     {
-        return await _userService.DeleteUserAsync(userId, token);
+        return _userService.DeleteUserAsync(userId, token);
     }
 }
