@@ -37,7 +37,7 @@ public sealed class EFCoreUserRepository : IUserRepository
 
     public async Task<bool> DeleteUserAsync(long userId, CancellationToken token = default)
     {
-        User user = await _appDbContext.Users.FirstOrDefaultAsync(p => p.Id == userId);
+        User user = await _appDbContext.Users.FirstOrDefaultAsync(p => p.Id == userId, cancellationToken: token);
         if (user != null)
         {
             _appDbContext.Users.Remove(user);
