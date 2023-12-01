@@ -18,7 +18,7 @@ public sealed class EFCorePostRepository : IPostRepository
             post.UserId = userId;
             post.User = user;
 
-            _appDbContext.Posts.Add(post);
+            await _appDbContext.Posts.AddAsync(post, token);
             await _appDbContext.SaveChangesAsync(token);
             return post;
         }

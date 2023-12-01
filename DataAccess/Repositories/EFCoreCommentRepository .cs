@@ -16,7 +16,7 @@ public sealed class EFCoreCommentRepository : ICommentRepository
         {
             post.Id = postId;
 
-            _appDbContext.Comments.Add(comment);
+            await _appDbContext.Comments.AddAsync(comment, token);
             await _appDbContext.SaveChangesAsync(token);
             return comment;
         }
