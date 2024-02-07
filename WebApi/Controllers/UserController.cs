@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
 using BusinessLogic;
+
 namespace WebApi;
 
 [ApiController]
@@ -11,7 +11,7 @@ public sealed class UserController : ControllerBase
 {
     private readonly IUserService _userService;
 
-    public UserController(IUserService userService, IOptionsMonitor<ConnectionStrings> options)
+    public UserController(IUserService userService)
     {
         _userService = userService;
     }

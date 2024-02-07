@@ -30,7 +30,7 @@ public sealed class PostController : ControllerBase
 
     [HttpGet("user/{userId}")]
     [AllowAnonymous]
-    public  Task<IEnumerable<PostDto>> GetPostsByUserIdAsync([FromRoute] long userId, CancellationToken token)
+    public Task<IEnumerable<PostDto>> GetPostsByUserIdAsync([FromRoute] long userId, CancellationToken token)
     {
         return _postService.GetPostsByUserIdAsync(userId, token);
     }

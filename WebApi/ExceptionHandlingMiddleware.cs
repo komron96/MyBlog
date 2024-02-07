@@ -33,7 +33,7 @@ public sealed class ExceptionHandlingMiddleware
         var errorResponse = ex switch
         {
             PostNotFoundException _ => new { StatusCode = HttpStatusCode.NotFound, IsSuccessful = false, Message = "Post not found in Database !" },
-            UserNotFoundException _ => new { StatusCode = HttpStatusCode.NotFound, IsSuccessful = false, Message = "User not found in Database !" },
+            UserNotFoundException _ => new { StatusCode = HttpStatusCode.NotFound, IsSuccessful = false, Message = "User not found in Database ALO SISKI!" },
             NotAuthorized _ => new { StatusCode = HttpStatusCode.Unauthorized, IsSuccessful = false, Message = "User is not authorized." },
             BadRequestException _ => new { StatusCode = HttpStatusCode.BadRequest, IsSuccessful = false, Message = "Something gone wrong with request, check your sending information" },
             _ => new { StatusCode = HttpStatusCode.InternalServerError, IsSuccessful = false, Message = "Failed to execute the request, error: " + ex.Message }
