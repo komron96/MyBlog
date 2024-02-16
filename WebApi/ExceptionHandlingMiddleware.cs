@@ -14,6 +14,8 @@ public sealed class ExceptionHandlingMiddleware
         _logger = logger;
     }
 
+
+    //Определение того последовательность работы у мидлвейра через invoke
     public async Task InvokeAsync(HttpContext httpContext)
     {
         try
@@ -32,16 +34,18 @@ public sealed class ExceptionHandlingMiddleware
 
         var errorResponse = ex switch
         {
-            PostNotFoundException _ => new { StatusCode = HttpStatusCode.NotFound, IsSuccessful = false, Message = "Post not found in Database !" },
-            UserNotFoundException _ => new { StatusCode = HttpStatusCode.NotFound, IsSuccessful = false, Message = "User not found in Database ALO SISKI!" },
-            NotAuthorized _ => new { StatusCode = HttpStatusCode.Unauthorized, IsSuccessful = false, Message = "User is not authorized." },
-            BadRequestException _ => new { StatusCode = HttpStatusCode.BadRequest, IsSuccessful = false, Message = "Something gone wrong with request, check your sending information" },
+            ResourceNotFoundException => new { StatusCode = HttpStatusCode.NotFound, IsSuccessful = false, Message = "We are sorry, the page you requested cannot be found." },
+            NotFoundEntity notFoundEntity => new { StatusCode = HttpStatusCode.NotFound, IsSuccessful = false,  notFoundEntity.Message },
+            NotAuthorized => new { StatusCode = HttpStatusCode.Unauthorized, IsSuccessful = false, Message = "User is not authorized." },
+            BadRequestException => new { StatusCode = HttpStatusCode.BadRequest, IsSuccessful = false, Message = "Something gone wrong with request, check your sending information" },
             _ => new { StatusCode = HttpStatusCode.InternalServerError, IsSuccessful = false, Message = "Failed to execute the request, error: " + ex.Message }
         };
 
-
+        //здесь определяется какой вид ответа должен быть с каким кодом
         httpContext.Response.ContentType = "application/json";
         httpContext.Response.StatusCode = (int)errorResponse.StatusCode;
+
+        //Возвращает результат в виде json
         return httpContext.Response.WriteAsJsonAsync(errorResponse, token);
     }
 }

@@ -14,9 +14,7 @@ public sealed class PostService : IPostService
 
     public async Task<PostDto?> CreatePostAsync(PostDto postDto, long userId, CancellationToken token)
     {
-        Post? post = await _iPostRepository.CreatePostAsync(postDto.ToPostClass(), userId, token);
-        if (post is null)
-            return null;
+        Post? post = await _iPostRepository.CreatePostAsync(postDto.ToPostClass(), userId, token) ?? throw new NotFoundEntity("Пользователь не найден при попытке создать пост");
         return post.ToPostDto();
     }
 

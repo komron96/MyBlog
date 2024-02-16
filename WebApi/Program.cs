@@ -19,8 +19,9 @@ builder.Services.AddControllers();
 
 //Запуск приложения
 WebApplication app = builder.Build();
-
+app.Map("/", () => "Index Page");
 //Мидлвейр для обработки исключений
+
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 

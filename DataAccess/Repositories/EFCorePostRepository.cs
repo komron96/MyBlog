@@ -12,10 +12,11 @@ public sealed class EFCorePostRepository : IPostRepository
     }
     public async Task<Post?> CreatePostAsync(Post post, long userId, CancellationToken token)
     {
-        User? user = await _appDbContext.Users.FindAsync(new object?[] { userId }, cancellationToken: token);
+        User? user = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
         if (user != null)
         {
-            post.UserId = userId;
+            post.UserId = user.Id;
             post.User = user;
 
             await _appDbContext.Posts.AddAsync(post, token);
@@ -35,9 +36,7 @@ public sealed class EFCorePostRepository : IPostRepository
 
     public async Task<IEnumerable<Post>> GetPostsByUserIdAsync(long userId, CancellationToken token)
     {
-        return await _appDbContext.Posts
-            .Where(post => post.UserId == userId)
-            .ToListAsync(token);
+        return await _appDbContext.Posts.Where(post => post.UserId == userId).ToListAsync(token);
     }
 
 

@@ -37,7 +37,7 @@ public sealed class UserController : ControllerBase
 
         if (followerUserDto == null || followingUserDto == null)
         {
-            throw new UserNotFoundException();
+            throw new NotFoundEntity("Сиськи");
         }
 
         UserDto followerUser = followerUserDto.Value;
@@ -56,7 +56,7 @@ public sealed class UserController : ControllerBase
         }
         else
         {
-            throw new UserNotFoundException();
+            throw new NotFoundEntity("Один из пользователей не найден");
         }
     }
 
