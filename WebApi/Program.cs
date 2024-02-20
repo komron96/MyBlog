@@ -1,7 +1,8 @@
 using BusinessLogic;
 using WebApi;
 
-//Builer - конфигурация приложения
+//check
+//Builder - конфигурация приложения
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection(Constants.ConnectionStringsSectionName));
